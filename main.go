@@ -19,6 +19,10 @@ func main() {
 		fmt.Println("Calling Insert")
 		cmd.Insert()
 		break
+	case "--correct":
+		fmt.Println("Calling Correct")
+		cmd.Correct()
+		break
 	default:
 		fmt.Println("Params should be either --download to connect and download, or --insert to insert to database")
 	}

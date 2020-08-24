@@ -33,7 +33,7 @@ func Insert() {
 	counters := make(map[string]int)
 	spanishCategories := make(map[string]int)
 	categoryRelation := *getMapRelations()
-	for i := 1; i < 3; i++ {
+	for i := 1; i < 1148; i++ {
 		fileN := fileName + strconv.Itoa(i) + ".xml"
 		content := utils.ReadFile(fileN)
 		productList, err := processor.Process(&content)
@@ -50,8 +50,7 @@ func Insert() {
 			if language == "Spanish" {
 				spanishCategories[course.Categories.Primary] = spanishCategories[course.Categories.Primary] + 1
 				spanishCategories[course.Categories.Secondary] = spanishCategories[course.Categories.Secondary] + 1
-
-				if categoryRelation[course.Categories.Primary] > 0 {
+				if !connector.CheckIfExists(course.ProductName) && categoryRelation[course.Categories.Primary] > 0 {
 					post := converter.Convert(&course)
 					err := connector.DB.Create(&post).Error
 					if err != nil {

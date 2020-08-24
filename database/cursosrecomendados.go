@@ -36,10 +36,24 @@ func Connect() *Connector {
 	return &dbConnector
 }
 
+// CheckIfExists returns if exists a post with given title
+func (conn *Connector) CheckIfExists(filterTitleWhere string) bool {
+	var count int
+	conn.DB.Table("wp_posts").Where("post_title like ? and post_type like 'post'", filterTitleWhere).Count(&count)
+	return count > 0
+}
+
 // FindPostsByTitle returns the posts from wp_posts table
 func (conn *Connector) FindPostsByTitle(filterTitleWhere string) *[]WpPost {
 	var result []WpPost
 	conn.DB.Table("wp_posts").Where("post_title like ? and post_type like 'post'", filterTitleWhere).Scan(&result)
+	return &result
+}
+
+// GetPosts returns all posts from wp_posts table
+func (conn *Connector) GetPosts(num int) *[]WpPost {
+	var result []WpPost
+	conn.DB.Table("wp_posts").Where(" post_type like 'post'").Order("ID desc").Limit(num).Scan(&result)
 	return &result
 }
 
