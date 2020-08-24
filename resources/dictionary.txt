@@ -22,6 +22,7 @@ clida cálida
 caractersticas características
 japons japonés
 relacin relación
+nio niño
 nios niños
 ms más
 sumrgete sumérgete
@@ -80,3 +81,4 @@ prctico práctico
 prcticos prácticos
 geometra geometría
 coreografa coreografía
+educacin educación
